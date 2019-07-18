@@ -1,0 +1,7 @@
+{
+  "name": "MadOnics500",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

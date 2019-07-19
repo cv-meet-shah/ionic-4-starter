@@ -13,7 +13,7 @@ describe('UtilService', () => {
   });
 
   const keyName = 'unitTesting';
-  const data = 'testing';
+  const data = 'testing';  
   it('should store the data to localStorage', () => {
     expect(service.setLocalStorage(keyName, data)).toBeFalsy();
     expect(service.getLocalStorage(keyName)).toEqual(data);
@@ -23,11 +23,19 @@ describe('UtilService', () => {
     expect(service.getLocalStorage(keyName)).toEqual(data);
   });
 
+  it('should work if localstorage don\'t return on wrong keyName', () => {
+    expect(service.getLocalStorage('')).toBeFalsy();
+  });
+
   it('should display the loader on the screen', () => {
     expect(service.showAutoHideLoader()).toBeFalsy();
   });
 
   it('should display confirm model', () => {
     expect(service.presentConfirmModal()).toBeTruthy();
+  });
+  
+  it('should display toast', () => {
+    expect(service.presentToast()).toBeFalsy();
   });
 });

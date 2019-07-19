@@ -37,7 +37,7 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         if (error.status === 401) {
           if (error.error.success === false) {
-            // this.util.presentToast('Login failed');
+            this.util.presentToast('Login failed');
           } else {
             // this.router.navigate(['login']);
           }

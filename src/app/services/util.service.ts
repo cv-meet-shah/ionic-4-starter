@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, AlertController } from '@ionic/angular';
+import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,8 @@ export class UtilService {
 
   constructor(
     public loadingController: LoadingController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public toastController: ToastController
   ) { }
 
   /**
@@ -75,6 +76,16 @@ export class UtilService {
             }
           ]
         }).then((alert) => alert.present());
+    });
+  }
+
+  presentToast(message: string = "", duration: number = 2000, position: any = "top") {
+    this.toastController.create({
+      message,
+      duration,
+      position
+    }).then(toast=> {
+      toast.present()
     });
   }
 }

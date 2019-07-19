@@ -79,7 +79,13 @@ export class UtilService {
     });
   }
 
-  presentToast(message: string = "", duration: number = 2000, position: any = "top") {
+  /**
+   * Method to display Toast on the screen.
+   * @optional @param title string value display as message.
+   * @optional @param duration timeout value hide the toaster. Default is 2s.
+   * @optional @param position string value to decide where to popup the toast.
+   */
+  presentToast(message: string = "", position: any = "top", duration: number = 2000) {
     this.toastController.create({
       message,
       duration,

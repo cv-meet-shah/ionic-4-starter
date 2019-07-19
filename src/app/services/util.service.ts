@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class UtilService {
 
   constructor(
-
+    public loadingController: LoadingController
   ) { }
 
   /**
@@ -24,5 +25,22 @@ export class UtilService {
    */
   setLocalStorage(keyName: string, value: any): void {
     localStorage.setItem(keyName, JSON.stringify(value));
+  }
+
+  /**
+   * Method to display the autoHiding loader based on requirement.
+   * @optional @param message Pass the message to display.
+   * @optional @param duration string to override 2s timeout.
+   */
+  showAutoHideLoader(message: string = '', duration: number = 2000) {
+    this.loadingController.create({
+      message,
+      duration
+    }).then((res) => {
+      res.present();
+      res.onDidDismiss().then((dis) => {
+        console.log('Loading dismissed! after 2 Seconds');
+      });
+    });
   }
 }

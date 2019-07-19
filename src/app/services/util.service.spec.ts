@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { UtilService } from './util.service';
 
 describe('UtilService', () => {
@@ -26,5 +25,9 @@ describe('UtilService', () => {
 
   it('should display the loader on the screen', () => {
     expect(service.showAutoHideLoader()).toBeFalsy();
+  });
+
+  it('should display confirm model', () => {
+    expect(service.presentConfirmModal()).toBeTruthy();
   });
 });

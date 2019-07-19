@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,8 @@ import { LoadingController } from '@ionic/angular';
 export class UtilService {
 
   constructor(
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public alertCtrl: AlertController
   ) { }
 
   /**
@@ -41,6 +43,38 @@ export class UtilService {
       res.onDidDismiss().then((dis) => {
         console.log('Loading dismissed! after 2 Seconds');
       });
+    });
+  }
+
+  /**
+   * Method to display confirmation modal.
+   * @optional @param title string value display as Title.
+   * @optional @param message string value display as Message.
+   * @optional @param successText Success button text value.
+   * @optional @param cancelText Cancel button text valuel.
+   */
+  presentConfirmModal(
+    title?: string,
+    message?: string,
+    successText: string = 'Yes',
+    cancelText: string = 'No',
+  ): Observable<boolean> {
+    return Observable.create((observer) => {
+        this.alertCtrl.create({
+          header: title || '',
+          message: message || '',
+          buttons: [
+            {
+              text: cancelText,
+              role: 'destructive',
+              handler: () => observer.next(false)
+            }, {
+              text: successText,
+              role: 'destructive',
+              handler: () => observer.next(true)
+            }
+          ]
+        }).then((alert) => alert.present());
     });
   }
 }
